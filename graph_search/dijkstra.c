@@ -255,12 +255,20 @@ void dijkstra_free(void *dijkstra)
    {
       if (dij->graph)
       {
+         if (dij->graph->edges)
+         {
+            free(dij->graph->edges);
+            dij->graph->edges = NULL;
+         }
+
          free_graph(&(dij->graph));
       }
+
       if (dij->nodes)
       {
          free(dij->nodes);
       }
+
       free(dij);
    }
 }
